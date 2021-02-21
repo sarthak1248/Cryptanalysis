@@ -1,0 +1,616 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include <stdlib.h>
+#include<time.h>
+#include<unistd.h>
+int main()
+
+{
+  printf("CRYPTOANALYSIS");
+  printf("\n                       :::::::::::::::::::::::::::::::::::::");
+  printf("\n                       ::                                  ::");
+  printf("\n                       ::      @@@@@@@@@@@@@@@@@@@@@@@     ::");
+  printf("\n                       ::      @                     @     ::");
+  printf("\n                       ::      @      WELCOME TO     @     ::");
+  printf("\n                       ::      @                     @     ::");
+  printf("\n                       ::      @    Cryptanalysis    @     ::");
+  printf("\n                       ::      @                     @     ::");
+  printf("\n                       ::      @@@@@@@@@@@@@@@@@@@@@@@     ::");
+  printf("\n                       ::                                  ::");
+  printf("\n                       :::::::::::::::::::::::::::::::::::::\n\n");
+  int num, i, k, j, len1, len2,numstr[100], numkey[100], numcipher[100], keyceaser;
+  unsigned long int fact;
+  char str[10], key[10], msg[10],cipher[100], Cipher, str_message[500], ch, Ceaser, Vigenere, OTP,newKey[strlen(msg)], decryptedMsg[strlen(msg)];
+  double time_spent = 0.0;
+  clock_t start, end;
+  while (1)
+  {
+    printf(" ==================================================================\n");
+    printf("||             1- Ceaser Cipher                                   ||\n");
+    printf("||             2- Vigenere Cipher                                 ||\n");
+    printf("||             3- Onetimepad Cipher                               ||\n");
+
+    printf("||             4- Exit system:                                    ||\n");
+
+    printf("||================================================================||\n");
+
+    printf("Enter your choice :  ");
+
+    scanf("%d", & Cipher);
+
+    switch (Cipher)
+
+    {
+
+    case 1:
+
+      printf(" ===================================================================\n");
+
+      printf("||             1- Encryption :                                    ||\n");
+
+      printf("||             2- Decryption:                                     ||\n");
+
+      printf("||             3- Exit system:                                    ||\n");
+
+      printf("||================================================================||\n");
+
+      printf("Enter your choice:  ");
+
+      scanf("%d", & Ceaser);
+
+      //CEASER CIPHER 
+
+      switch (Ceaser)
+
+      {
+
+        //Ceaser Encryption
+
+      case 1:
+
+        start = clock();
+
+        printf("Enter a message to encrypt: ");
+
+        scanf("%s", str_message);
+
+        printf("Enter the key: ");
+
+        scanf("%d", & keyceaser);
+
+        sleep(1);
+
+        for (j = 0; str_message[j] != '\0'; ++j) {
+
+          ch = str_message[j];
+
+          if (ch >= 'a' && ch <= 'z') {
+
+            ch = ch + keyceaser;
+
+            if (ch > 'z') {
+
+              ch = ch - 'z' + 'a' - 1;
+
+            }
+
+            str_message[j] = ch;
+
+          } else if (ch >= 'A' && ch <= 'Z') {
+
+            ch = ch + keyceaser;
+
+            if (ch > 'Z') {
+
+              ch = ch - 'Z' + 'A' - 1;
+
+            }
+
+            str_message[j] = ch;
+
+          }
+
+        }
+
+        printf("Encrypted message: %s", str_message);
+
+        end = clock();
+
+        double duration = ((double) end - start) / CLOCKS_PER_SEC;
+
+        printf("time elapsed is %f", duration);
+
+        continue;
+
+        //Ceaser Decryption
+
+      case 2:
+
+        start = clock();
+
+        printf("Enter a message to decrypt: ");
+
+        scanf("%s", str_message);
+
+        printf("Enter key: ");
+
+        scanf("%d", & keyceaser);
+
+        for (j = 0; str_message[j] != '\0'; ++j) {
+
+          ch = str_message[j];
+
+          if (ch >= 'a' && ch <= 'z') {
+
+            ch = ch - keyceaser;
+
+            if (ch < 'a') {
+
+              ch = ch + 'z' - 'a' + 1;
+
+            }
+
+            str_message[j] = ch;
+
+          } else if (ch >= 'A' && ch <= 'Z') {
+
+            ch = ch - keyceaser;
+
+            if (ch < 'A') {
+
+              ch = ch + 'Z' - 'A' + 1;
+
+            }
+
+            str_message[j] = ch;
+
+          }
+
+        }
+
+        printf("Decrypted message: %s", str_message);
+
+        end = clock();
+
+        double duration1 = ((double) end - start) / CLOCKS_PER_SEC;
+
+        printf("time elapsed is %f", duration1);
+
+        continue;
+
+      case 3:
+
+        printf("\n\n\t\t\tCeaser Cipher  !\n\n\n");
+
+        exit(0); // terminates the complete program execution
+
+        continue;
+
+      }
+
+      //VIGENERE CIPHER
+
+      case 2:
+
+        printf(" \n===================================================================\n");
+
+        printf("||             1- Encryption :                                    ||\n");
+
+        printf("||             2- Decryption:                                     ||\n");
+
+        printf("||             3- Exit system:                                    ||\n");
+
+        printf("||================================================================||\n");
+
+        printf("Enter your choice:  ");
+
+        scanf("%d", & Vigenere);
+
+        switch (Vigenere)
+
+        {
+
+        case 1:
+
+          //Vigenere Encryption
+start = clock();         
+ printf("Enter a string\n");
+ gets();
+ fgets(str,10,stdin);
+ str[strlen(str)-1]='\0';
+         sleep(1);
+ //converting entered string to Capital letters
+ for(i=0,j=0;i<strlen(str);i++)
+ {
+  if(str[i]!=' ')
+  {
+   str[j]=toupper(str[i]);   
+   j++;
+  }
+ }
+ str[j]='\0';
+ printf("Entered string is : %s \n",str);
+ //Storing string in terms of ascii
+ for(i=0;i<strlen(str);i++)
+ {
+  numstr[i]=str[i]-'A';
+ }
+ printf("Enter a key\n");
+ fgets(key,10,stdin);
+ key[strlen(key)-1]='\0';
+    //converting entered key to Capital letters
+ for(i=0,j=0;i<strlen(key);i++)
+ {
+  if(key[i]!=' ')
+  {
+   key[j]=toupper(key[i]);   
+   j++;
+  }
+ }
+ key[j]='\0';
+     //Assigning key to the string
+    for(i=0;i<strlen(str);)
+    {
+     for(j=0;(j<strlen(key))&&(i<strlen(str));j++)
+     {
+      numkey[i]=key[j]-'A';
+      i++;
+     }
+     
+    }
+    
+    for(i=0;i<strlen(str);i++)
+    {
+     numcipher[i]=numstr[i]+numkey[i];
+    }
+    for(i=0;i<strlen(str);i++)
+    {
+     if(numcipher[i]>25)
+     {
+      numcipher[i]=numcipher[i]-26;
+     }
+    }
+    printf("Vigenere Cipher text is\n");   
+    for(i=0;i<strlen(str);i++)
+    {
+      printf("%c",(numcipher[i]+'A')); 
+    }
+    
+ printf("\n");
+ end = clock();
+
+        double duration8 = ((double) end - start) / CLOCKS_PER_SEC;
+
+        printf("time elapsed is %f", duration8);
+
+         
+        continue;
+        
+        case 2:
+        start = clock();
+	printf("Enter Encrypted Message: ");
+	gets();
+    fgets(msg, 20, stdin);
+    msg[strlen(msg)-1]='\0';
+   
+    printf("Enter Key:  ");
+    fgets(key, 10, stdin);
+    key[strlen(key)-1]='\0';
+          sleep(1);
+    //generating new key
+    for(i = 0, j = 0; i < strlen(msg); ++i, ++j){
+        if(j == strlen(key))
+            j = 0;
+        newKey[i] = key[j];
+    }
+ 
+    newKey[i] = '\0';
+ 
+    //decryption
+    for(i = 0; i < strlen(msg); ++i)
+        decryptedMsg[i] = (((msg[i] - newKey[i]) + 26) % 26) + 'A';
+ 
+    decryptedMsg[i] = '\0';
+ 
+    printf("Encrypted Message: %s", msg);
+    printf("\nKey: %s", key);
+    printf("\nNew Generated Key: %s", newKey);
+    printf("\nDecrypted Message: %s", decryptedMsg); 
+    end = clock();
+        double duration9 = ((double) end - start) / CLOCKS_PER_SEC;
+        printf("time elapsed is %f", duration9);
+
+    
+
+continue;
+case 3:
+ printf("\n\n\t\t\tVigenere Cipher !\n\n\n");
+
+            exit(0); // terminates the complete program execution
+
+            break;
+            }
+        case 3:
+
+          printf(" ===================================================================\n");
+
+          printf("||             1- Encryption :                                    ||\n");
+
+          printf("||             2- Decryption:                                     ||\n");
+
+          printf("||             3- Exit system:                                    ||\n");
+
+          printf("||================================================================||\n");
+
+          printf("Enter your choice:  ");
+
+          scanf("%d", & OTP);
+          
+
+          //One Time Pad Cipher
+
+          switch (OTP)
+
+          {
+
+          case 1:
+
+            //OTP Encryption!             
+
+            start = clock();
+            
+            printf("Enter a string text to encrypt\n");
+
+            gets();
+
+            fgets(str,10,stdin);
+            str[strlen(str)-1]='\0';
+
+            for (i = 0, j = 0; i < strlen(str); i++)
+
+            {
+
+              if (str[i] != ' ')
+
+              {
+
+                str[j] = toupper(str[i]);
+
+                j++;
+
+              }
+
+            }
+
+            str[j] = '\0';
+
+            //obtaining numerical plain text ex A-0,B-1,C-2
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              numstr[i] = str[i] - 'A';
+
+            }
+
+            printf("Enter key string of random text\n");
+
+            fgets(key,10,stdin);
+             key[strlen(key)-1]='\0';  
+
+            sleep(1);
+
+            for (i = 0, j = 0; i < strlen(key); i++)
+
+            {
+
+              if (key[i] != ' ')
+
+              {
+
+                key[j] = toupper(key[i]);
+
+                j++;
+
+              }
+
+            }
+
+            key[j] = '\0';
+
+            //obtaining numerical one time pad(OTP) or key
+
+            for (i = 0; i < strlen(key); i++)
+
+            {
+
+              numkey[i] = key[i] - 'A';
+
+            }
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              numcipher[i] = numstr[i] + numkey[i];
+
+            }
+
+            //To loop the number within 25 i.e if addition of numstr and numkey is 27 then numcipher should be 1
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              if (numcipher[i] > 25)
+
+              {
+
+                numcipher[i] = numcipher[i] - 26;
+
+              }
+
+            }
+
+            printf("One Time Pad Cipher text is\n");
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              printf("%c", (numcipher[i] + 'A'));
+
+            }
+
+            printf("\n");
+            
+             end = clock();
+
+             double duration3 = ((double) end - start) / CLOCKS_PER_SEC;
+
+             printf("time elapsed is %f", duration3);
+
+            continue;
+
+          case 2:
+
+            //OTP Decryption 
+
+            start = clock();
+            
+            printf("Enter an Encrypted string text to Decrypt\n");
+
+            gets();
+
+            fgets(str,10,stdin);
+            str[strlen(str)-1]='\0';
+
+            for (i = 0, j = 0; i < strlen(str); i++)
+
+            {
+
+              if (str[i] != ' ')
+
+              {
+
+                str[j] = toupper(str[i]);
+
+                j++;
+
+              }
+
+            }
+
+            str[j] = '\0';
+
+            //obtaining numerical plain text ex A-0,B-1,C-2
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              numstr[i] = str[i] - 'A';
+
+            }
+
+            printf("Enter key string of random text\n");
+
+            fgets(key,10,stdin);
+              key[strlen(key)-1]='\0';
+            sleep(1);
+
+            for (i = 0, j = 0; i < strlen(key); i++)
+
+            {
+
+              if (key[i] != ' ')
+
+              {
+
+                key[j] = toupper(key[i]);
+
+                j++;
+
+              }
+
+            }
+
+            key[j] = '\0';
+
+            //obtaining numerical one time pad(OTP) or key
+
+            for (i = 0; i < strlen(key); i++)
+
+            {
+
+              numkey[i] = key[i] - 'A';
+
+            }
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              numcipher[i] = numstr[i] - numkey[i]; //changed from + to - for decryption
+
+              if (numcipher[i] < 0)
+
+              {
+
+                numcipher[i] = numcipher[i] + 26; //If cipher is negative we have to add 26
+
+              }
+
+              numcipher[i] = numcipher[i] % 26; //To loop within 1 to 26 for alphabets from A-Z
+
+            }
+
+            printf("Decrypted One Time Pad Cipher text is\n");
+
+            for (i = 0; i < strlen(str); i++)
+
+            {
+
+              printf("%c", (numcipher[i] + 'A'));
+
+            }
+
+            printf("\n");
+            
+             end = clock();
+
+             double duration4 = ((double) end - start) / CLOCKS_PER_SEC;
+
+             printf("time elapsed is %f", duration4);
+
+            continue;
+
+          case 3:
+
+            printf("\n\n\t\t\tOne Time Pad Cipher !\n\n\n");
+
+            exit(0); // terminates the complete program execution
+
+            break;
+
+          }
+
+          case 4:
+
+            printf("\n\n\t\t\tCoding is Fun !\n\n\n");
+
+            exit(0); // terminates the complete program execution
+
+            break;
+
+    }
+
+  }
+
+  printf("\n\n\t\t\tCoding is Fun !\n\n\n");
+
+  return 0;
+
+}
